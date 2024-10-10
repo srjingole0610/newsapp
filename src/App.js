@@ -1,25 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import './App.css';
+import React, { Component } from 'react'
+
+ class App extends Component {
+  /**
+   * This is the main class for the App component
+   * It renders a single div with the message "Hello my first class based Component"
+   * @returns {JSX.Element}
+   */
+   c = "suraj";
+  render() {
+   
+    return (
+      <div>
+        {/* Simple message to be displayed */}
+        Hello my first class based Component {this.c}
+      </div>
+    )
+  }
 }
 
 export default App;

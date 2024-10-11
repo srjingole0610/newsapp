@@ -62,15 +62,11 @@ export class News extends Component {
       <div className="container mx-3 my-3 ">
         <h2>NewsMonkey-Top Headline</h2>
         <div className="row">
-          <div className="col-md-4">
-            <NewsItem title="Suraj" description="My name is suraj" imageUrl = "https://a4.espncdn.com/combiner/i?img=%2Fi%2Fcricket%2Fcricinfo%2F1099495_800x450.jpg"  newsUrl="TODO"/>
+        {this.state.articles.map((ele)=>{
+          return <div className="col-md-4"  key={ele.url}>
+            <NewsItem title={ele.title.slice(0,45)} description={ele.description.slice(0,88)} imageUrl = {ele.urlToImage}  newsUrl={ele.url}/>
           </div>
-          <div className="col-md-4">
-            <NewsItem title="Suraj" description="My name is suraj" imageUrl = "https://a4.espncdn.com/combiner/i?img=%2Fi%2Fcricket%2Fcricinfo%2F1219926_1296x729.jpg"  newsUrl="TODO" />
-          </div>
-          <div className="col-md-4">
-            <NewsItem title="Suraj" description="My name is suraj" imageUrl = "https://a4.espncdn.com/combiner/i?img=%2Fi%2Fcricket%2Fcricinfo%2F1099495_800x450.jpg"  newsUrl="TODO"/>
-          </div>
+        })}
         </div>
       </div>
     );

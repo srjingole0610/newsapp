@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import NewsItem from "./NewsItem";
 import Spinner from "./Spinner";
+import PropTypes from 'prop-types'
+
  
 export class News extends Component {
     /**
@@ -9,6 +11,20 @@ export class News extends Component {
      * This constructor initializes the state with an empty array of articles and
      * sets loading to false.
      */
+    static defaultProps = {
+        country: 'in',
+        pageSize: 8,
+        category: 'general',
+        apiKey: 'fc870bc58a4649b3a621dbef4c595f2a'
+      }   
+
+    static propTypes = {
+      country: PropTypes.string,
+      pageSize: PropTypes.number,
+      category: PropTypes.string,
+      apiKey: PropTypes.string
+
+    }
     constructor() {
         super();
         this.state = {
@@ -24,7 +40,7 @@ export class News extends Component {
        * @memberof News
        */
       async componentDidMount() {
-        const url = `https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=fc870bc58a4649b3a621dbef4c595f2a&page=${this.state.page}&pageSize=${this.props.pageSize}`
+        const url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=fc870bc58a4649b3a621dbef4c595f2a&page=${this.state.page}&pageSize=${this.props.pageSize}`
         this.setState({loading:true})
         const data = await fetch(url)
         const parsedData = await data.json();
@@ -38,7 +54,7 @@ export class News extends Component {
       }
 
        handlePrevClick = async ()=>{
-        const url = `https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=fc870bc58a4649b3a621dbef4c595f2a&page=${this.state.page - 1}&pageSize=${this.props.pageSize}`;
+        const url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=fc870bc58a4649b3a621dbef4c595f2a&page=${this.state.page - 1}&pageSize=${this.props.pageSize}`;
         this.setState({loading:true})
         const data = await fetch(url)
         const parsedData = await data.json();
@@ -54,7 +70,7 @@ export class News extends Component {
      handleNextClick = async ()=>{
         if(!(this.state.page + 1 > Math.ceil(this.state.totalResults/this.props.pageSize))){
 
-        const url = `https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=fc870bc58a4649b3a621dbef4c595f2a&page=${this.state.page + 1}&pageSize=${this.props.pageSize}`;
+        const url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=fc870bc58a4649b3a621dbef4c595f2a&page=${this.state.page + 1}&pageSize=${this.props.pageSize}`;
         this.setState({loading:true})
         const data = await fetch(url)
         const parsedData = await data.json();

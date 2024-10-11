@@ -12,7 +12,8 @@ export class News extends Component {
         super();
         this.state = {
            articles: [],
-           loading:false
+           loading:false,
+           page:1
         }
       }
       /**
@@ -22,16 +23,45 @@ export class News extends Component {
        * @memberof News
        */
       async componentDidMount() {
-        console.log("I am componentDidMount from News Component")
-        const url = "https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=fc870bc58a4649b3a621dbef4c595f2a"
+        const url = "https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=fc870bc58a4649b3a621dbef4c595f2a&page=1&pageSize=20"
         const data = await fetch(url)
         const parsedData = await data.json();
-        console.log(parsedData)
         this.setState(
           {
-            articles: parsedData.articles
+            articles: parsedData.articles,
+            totalResults: parsedData.totalResults
           }
         )
+      }
+
+       handlePrevClick = async ()=>{
+        const url = `https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=fc870bc58a4649b3a621dbef4c595f2a&page=${this.state.page - 1}&pageSize=20`;
+        const data = await fetch(url)
+        const parsedData = await data.json();
+        this.setState(
+          {
+            articles: parsedData.articles,
+            page:this.state.page-1,
+          }
+        )
+      }
+
+     handleNextClick = async ()=>{
+        if(this.state.page + 1 > Math.ceil(this.state.totalResults/20)){
+            return;
+
+        }
+        else{
+        const url = `https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=fc870bc58a4649b3a621dbef4c595f2a&page=${this.state.page + 1}&pageSize=20`;
+        const data = await fetch(url)
+        const parsedData = await data.json();
+        this.setState(
+          {
+            articles: parsedData.articles,
+            page:this.state.page+1,
+          }
+        )
+    }
       }
   /**
    * Renders the News component.
@@ -44,7 +74,6 @@ export class News extends Component {
    * @return {JSX.Element} The rendered component.
    */
   render() {
-    console.log("I am render from News Component")
     return (
 
       <div className="container mx-3 my-3 ">
@@ -63,6 +92,10 @@ export class News extends Component {
             </div>
           })
         }
+        </div>
+        <div className="container d-flex justify-content-between">
+        <button  disabled={this.state.page<=1} type="button" className="btn btn-sm btn-dark" onClick={this.handlePrevClick}>&larr; Prev</button>
+        <button type="button" className="btn btn-sm btn-dark" onClick={this.handleNextClick}>Next &rarr;</button>
         </div>
       </div>
     );

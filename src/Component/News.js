@@ -1,76 +1,73 @@
 import React, { Component } from "react";
 import NewsItem from "./NewsItem";
  
-
 export class News extends Component {
-
-    articles= [{
-        "source": {
-          "id": "espn-cric-info",
-          "name": "ESPN Cric Info"
-        },
-        "author": null,
-        "title": "PCB hands Umar Akmal three-year ban from all cricket | ESPNcricinfo.com",
-        "description": "Penalty after the batsman pleaded guilty to not reporting corrupt approaches | ESPNcricinfo.com",
-        "url": "http://www.espncricinfo.com/story/_/id/29103103/pcb-hands-umar-akmal-three-year-ban-all-cricket",
-        "urlToImage": "https://a4.espncdn.com/combiner/i?img=%2Fi%2Fcricket%2Fcricinfo%2F1099495_800x450.jpg",
-        "publishedAt": "2020-04-27T11:41:47Z",
-        "content": "Umar Akmal's troubled cricket career has hit its biggest roadblock yet, with the PCB handing him a ban from all representative cricket for three years after he pleaded guilty of failing to report det… [+1506 chars]"
-      },
-      {
-        "source": {
-          "id": "espn-cric-info",
-          "name": "ESPN Cric Info"
-        },
-        "author": null,
-        "title": "What we learned from watching the 1992 World Cup final in full again | ESPNcricinfo.com",
-        "description": "Wides, lbw calls, swing - plenty of things were different in white-ball cricket back then | ESPNcricinfo.com",
-        "url": "http://www.espncricinfo.com/story/_/id/28970907/learned-watching-1992-world-cup-final-full-again",
-        "urlToImage": "https://a4.espncdn.com/combiner/i?img=%2Fi%2Fcricket%2Fcricinfo%2F1219926_1296x729.jpg",
-        "publishedAt": "2020-03-30T15:26:05Z",
-        "content": "Last week, we at ESPNcricinfo did something we have been thinking of doing for eight years now: pretend-live ball-by-ball commentary for a classic cricket match. We knew the result, yes, but we tried… [+6823 chars]"
-      }]
-
     /**
-     * Class constructor.
-     * @constructor
-     * @param {object} props - component properties
-     * @param {object} context - component context
-     * @param {object} state - component state
-     * @param {object} articles - articles data
-     * @param {boolean} loading - loading status
+     * Constructor for the News class.
+     *
+     * This constructor initializes the state with an empty array of articles and
+     * sets loading to false.
      */
     constructor() {
         super();
-        console.log("I am constructor from News Component")
         this.state = {
-           articles: this.articles,
+           articles: [],
            loading:false
         }
       }
+      /**
+       * This lifecycle method is called when the component is mounted to the DOM.
+       * It fetches the data from the given URL and updates the state with the
+       * received data.
+       * @memberof News
+       */
+      async componentDidMount() {
+        console.log("I am componentDidMount from News Component")
+        const url = "https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=fc870bc58a4649b3a621dbef4c595f2a"
+        const data = await fetch(url)
+        const parsedData = await data.json();
+        console.log(parsedData)
+        this.setState(
+          {
+            articles: parsedData.articles
+          }
+        )
+      }
   /**
    * Renders the News component.
-   * 
-   * This component renders a container with a sample heading and three NewsItem
-   * components. It is designed to be used as a starting point for more complex
-   * news components.
-   * 
+   *
+   * This component renders a container with a heading and a row of NewsItem
+   * components. It maps over the articles array and renders each article as a
+   * NewsItem component. The NewsItem component is rendered with the title,
+   * description, image URL, and news URL.
+   *
    * @return {JSX.Element} The rendered component.
    */
   render() {
+    console.log("I am render from News Component")
     return (
+
       <div className="container mx-3 my-3 ">
         <h2>NewsMonkey-Top Headline</h2>
         <div className="row">
-        {this.state.articles.map((ele)=>{
-          return <div className="col-md-4"  key={ele.url}>
-            <NewsItem title={ele.title.slice(0,45)} description={ele.description.slice(0,88)} imageUrl = {ele.urlToImage}  newsUrl={ele.url}/>
-          </div>
-        })}
+        { /* Map over the articles array and render each article as a NewsItem component */
+          this.state.articles.map((ele)=>{
+            return <div className="col-md-4"  key={ele.url}>
+              { /* Render the NewsItem component with the title, description, image URL, and news URL */
+                <NewsItem 
+                  title={ele.title?ele.title.slice(0,45):""} 
+                  description={ele.description?ele.description.slice(0,88):""} 
+                  imageUrl = {ele.urlToImage?ele.urlToImage:""}  
+                  newsUrl={ele.url?ele.url:""}/>
+              }
+            </div>
+          })
+        }
         </div>
       </div>
     );
   }
+
 }
 
 export default News;

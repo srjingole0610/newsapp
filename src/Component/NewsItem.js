@@ -18,7 +18,7 @@ export class NewsItem extends Component {
             <p className="card-text" style={{color:"#666",fontSize:"1rem",lineHeight:"1.5rem"}}>
                 {description}
             </p>
-            <a href={newsUrl} target="_blank" rel="noopener noreferrer" className="btn btn-sm btn-outline-info" style={{borderColor:"#007bff",color:"#007bff",fontSize:"1rem"}}>
+            <a href={newsUrl} target="_blank" rel="noopener noreferrer" className="btn btn-sm btn-outline-info btn-dark" style={{borderColor:"#007bff",color:"#fff",fontSize:"1rem"}}>
               Read More
             </a>
           </div>

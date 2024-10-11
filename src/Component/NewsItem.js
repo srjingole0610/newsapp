@@ -11,7 +11,7 @@ export class NewsItem extends Component {
     let {title, description,imageUrl,newsUrl} = this.props;
     return (
       <div className="my-3">
-        <div className="card" style={{ width: "18rem",backgroundColor:"#fff",boxShadow:"0px 0px 10px rgba(0,0,0,0.2)",borderRadius:"1rem",overflow:"hidden" }}>
+        <div className="card" style={{ width: "20rem", height: "22.5rem",backgroundColor:"#fff",boxShadow:"0px 0px 10px rgba(0,0,0,0.2)",borderRadius:"1rem",overflow:"hidden" }}>
           <img src={imageUrl} className="card-img-top" alt="..." style={{height:"150px",objectFit:"cover",filter:"drop-shadow(0px 0px 10px rgba(0,0,0,0.2))"}}/>
           <div className="card-body p-3" style={{backgroundColor:"#fff", cursor:"pointer"}} onClick={()=>{window.location.href = newsUrl}}>
             <h5 className="card-title" style={{color:"#333",fontWeight:"bold",fontSize:"1.2rem"}}>{title}</h5>

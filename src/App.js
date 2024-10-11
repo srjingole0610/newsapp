@@ -18,7 +18,7 @@ import News from './Component/News';
     return (
       <div>
         <Navbar/>
-        <News pageSize = {5}/>
+        <News pageSize = {5} country = "us" category = "entertainment"/>
       </div>
     )
   }}

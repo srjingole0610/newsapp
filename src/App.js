@@ -19,47 +19,35 @@ class App extends Component {
    * @return {JSX.Element} The rendered component.
    */
   render() {
+    const categories = [
+      { path: '/', category: 'general' },
+      { path: '/business', category: 'business' },
+      { path: '/entertainment', category: 'entertainment' },
+      { path: '/general', category: 'general' },
+      { path: '/health', category: 'health' },
+      { path: '/science', category: 'science' },
+      { path: '/sports', category: 'sports' },
+      { path: '/technology', category: 'technology' },
+    ];
+    const pageSize = 5;
+    const country = "us"
+
     return (
       <div>
         <Router>
           <Navbar />
           <Routes>
-          <Route
+            <Route
               path="/about"
               element={<About/>}
             />
-            <Route
-              path="/"
-              element={<News pageSize={5} country="us" category="general" />}
-            />
-            <Route
-              path="/business"
-              element={<News pageSize={5} country="us" category="business" />}
-            />
-            <Route
-              path="/general"
-              element={<News pageSize={5} country="us" category="general" />}
-            />
-            <Route
-              path="/entertainment"
-              element={<News pageSize={5} country="us" category="entertainment" />}
-            />
-            <Route
-              path="/health"
-              element={<News pageSize={5} country="us" category="health" />}
-            />
-            <Route
-              path="/science"
-              element={<News pageSize={5} country="us" category="science" />}
-            />
-            <Route
-              path="/sports"
-              element={<News pageSize={5} country="us" category="sports" />}
-            />
-            <Route
-              path="/technology"
-              element={<News pageSize={5} country="us" category="technology" />}
-            />
+            {categories.map(({ path, category }) => (
+              <Route
+                key={path}
+                path={path}
+                element={<News className="bg-light" pageSize={pageSize} country={country}category={category} />}
+              />
+            ))}
           </Routes>
         </Router>
       </div>
@@ -68,3 +56,4 @@ class App extends Component {
 }
 
 export default App;
+

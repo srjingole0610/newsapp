@@ -1,18 +1,16 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import {  Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 export default class Navbar extends Component {
   static propTypes = {
     prop: PropTypes,
   };
-
   /**
    * Renders the Navbar component.
    *
-   * This component renders a navigation bar with some sample links. It is
-   * designed to be used as a starting point for more complex navigation bars.
+   * This component renders a Bootstrap navbar with links to the homepage, about page, and
+   * various categories of news.
    *
    * @return {JSX.Element} The rendered component.
    */
@@ -20,9 +18,9 @@ export default class Navbar extends Component {
     return (
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
         <div className="container-fluid">
-          <Link className="navbar-brand"to="#">
+          <NavLink className="navbar-brand" exact to="/">
             NewsMonkey
-          </Link>
+          </NavLink>
           <button
             className="navbar-toggler"
             type="button"
@@ -37,51 +35,65 @@ export default class Navbar extends Component {
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <li className="nav-item">
-                <Link className="nav-link active" aria-current="page"to="/">
+                <NavLink className="nav-link" exact to="/">
                   Home
-                </Link>
+                </NavLink>
               </li>
               <li className="nav-item">
-                <Link className="nav-link"to="/about">
+                <NavLink className="nav-link" to="/about">
                   About
-                </Link>
+                </NavLink>
               </li>
               <li className="nav-item">
-                <Link className="nav-link"to="/business">
+                <NavLink className="nav-link" to="/business">
                   Business
-                </Link>
+                </NavLink>
               </li>
               <li className="nav-item">
-                <Link className="nav-link"to="/entertainment">
+                <NavLink className="nav-link" to="/entertainment">
                   Entertainment
-                </Link>
+                </NavLink>
               </li>
               <li className="nav-item">
-                <Link className="nav-link"to="/general">
+                <NavLink className="nav-link" to="/general">
                   General
-                </Link>
+                </NavLink>
               </li>
               <li className="nav-item">
-                <Link className="nav-link"to="/health">
+                <NavLink className="nav-link" to="/health">
                   Health
-                </Link>
+                </NavLink>
               </li>
               <li className="nav-item">
-                <Link className="nav-link"to="/science">
+                <NavLink className="nav-link" to="/science">
                   Science
-                </Link>
+                </NavLink>
               </li>
               <li className="nav-item">
-                <Link className="nav-link"to="/sports">
+                <NavLink className="nav-link" to="/sports">
                   Sports
-                </Link>
+                </NavLink>
               </li>
               <li className="nav-item">
-                <Link className="nav-link"to="/technology">
+                <NavLink className="nav-link" to="/technology">
                   Technology
-                </Link>
+                </NavLink>
               </li>
             </ul>
+            <form className="d-flex" style={{ gap: "0.5rem" }}>
+              <input
+                className="form-control"
+                type="search"
+                placeholder="Search"
+                aria-label="Search"
+              />
+              <button
+                className="btn btn-outline-success"
+                type="submit"
+              >
+                Search
+              </button>
+            </form>
           </div>
         </div>
       </nav>

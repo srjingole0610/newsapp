@@ -32,7 +32,7 @@ export class News extends Component {
   async updateNews() {
     this.props.setProgress(10);
     const { country, category, pageSize } = this.props;
-    const url = `https://newsapi.org/v2/top-headlines?country=${country}&category=${category}&apiKey=fc870bc58a4649b3a621dbef4c595f2a&page=${this.state.page}&pageSize=${pageSize}`;
+    const url = `https://newsapi.org/v2/top-headlines?country=${country}&category=${category}&apiKey=${this.props.apiKey}&page=${this.state.page}&pageSize=${pageSize}`;
 
     this.setState({ loading: true });
     const data = await fetch(url);
@@ -74,7 +74,7 @@ export class News extends Component {
       page: this.state.page + 1,
     });
     const { country, category, pageSize } = this.props;
-    const url = `https://newsapi.org/v2/top-headlines?country=${country}&category=${category}&apiKey=fc870bc58a4649b3a621dbef4c595f2a&page=${this.state.page}&pageSize=${pageSize}`;
+    const url = `https://newsapi.org/v2/top-headlines?country=${country}&category=${category}&apiKey=${this.props.apiKey}&page=${this.state.page}&pageSize=${pageSize}`;
 
     this.setState({ loading: true });
     const data = await fetch(url);
@@ -125,24 +125,6 @@ export class News extends Component {
             ))}
           </div>
         </InfiniteScroll>
-        {/* <div className="container d-flex justify-content-between">
-          <button
-            disabled={page <= 1}
-            type="button"
-            className="btn btn-sm btn-dark"
-            onClick={() => this.handlePageClick(page - 1)}
-          >
-            &larr; Prev
-          </button>
-          <button
-            disabled={page >= lastPage}
-            type="button"
-            className="btn btn-sm btn-dark"
-            onClick={() => this.handlePageClick(page + 1)}
-          >
-            Next &rarr;
-          </button>
-        </div> */}
       </div>
     );
   }

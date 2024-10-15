@@ -12,6 +12,7 @@ import LoadingBar from 'react-top-loading-bar'
 
 class App extends Component {
 
+  apiKey = process.env.REACT_APP_NEWS_API
   state = {
     progress : 0,
   }
@@ -63,7 +64,7 @@ class App extends Component {
               <Route
                 key={path}
                 path={path}
-                element={<News setProgress={this.setProgress}  className="bg-light" pageSize={pageSize} country={country}category={category} />}
+                element={<News setProgress={this.setProgress} apiKey = {this.apiKey}  className="bg-light" pageSize={pageSize} country={country}category={category} />}
               />
             ))}
           </Routes>

@@ -3,16 +3,12 @@ import React from "react";
 /**
  * A functional component that renders a news item card.
  *
- * @param {string} title - The title of the news item.
- * @param {string} description - The description of the news item.
- * @param {string} imageUrl - The URL of the image associated with the news item.
- * @param {string} newsUrl - The URL of the news item.
- * @param {string} author - The author of the news item.
- * @param {Date} date - The date of the news item.
- * @param {string} source - The source of the news item.
+ * @param {{ title: string, description: string, imageUrl: string, newsUrl: string, author: string, date: Date, source: string }} props
  * @return {JSX.Element} The rendered component.
  */
 const NewsItem = ({ title, description, imageUrl, newsUrl, author, date, source }) => {
+  const handleClick = () => window.location.href = newsUrl;
+
   return (
     <div className="my-3 position-relative">
       <div className="card" style={{ width: "20rem", height: "100%", backgroundColor: "#fff", boxShadow: "0px 0px 10px rgba(0,0,0,0.2)", borderRadius: "1rem", overflow: "hidden" }}>
@@ -20,7 +16,7 @@ const NewsItem = ({ title, description, imageUrl, newsUrl, author, date, source 
         <div className="badge rounded-pill bg-warning position-absolute" style={{ top: "0.5rem", right: "0.5rem", zIndex: "1", color: "#000" }}>
           {source}
         </div>
-        <div className="card-body p-3" style={{ backgroundColor: "#fff", cursor: "pointer" }} onClick={() => { window.location.href = newsUrl }}>
+        <div className="card-body p-3" style={{ backgroundColor: "#fff", cursor: "pointer" }} onClick={handleClick}>
           <h5 className="card-title" style={{ color: "#333", fontWeight: "bold", fontSize: "1.2rem" }}>{title}</h5>
           <p className="card-text" style={{ color: "#666", fontSize: "1rem", lineHeight: "1.5rem" }}>
             {description}

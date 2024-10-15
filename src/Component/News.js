@@ -30,6 +30,7 @@ export class News extends Component {
   }
 
   async updateNews() {
+    this.props.setProgress(10);
     const { country, category, pageSize } = this.props;
     const url = `https://newsapi.org/v2/top-headlines?country=${country}&category=${category}&apiKey=fc870bc58a4649b3a621dbef4c595f2a&page=${this.state.page}&pageSize=${pageSize}`;
 
@@ -41,7 +42,9 @@ export class News extends Component {
       articles: parsedData.articles,
       totalResults: parsedData.totalResults,
       loading: false,
+
     });
+    this.props.setProgress(100)
   }
 
   componentDidMount() {
@@ -107,6 +110,7 @@ export class News extends Component {
             {articles.map((ele) => (
               <div className="col-md-4" key={ele.url}>
                 <NewsItem
+                  key={ele.url}
                   title={ele.title ? ele.title.slice(0, 45) : ""}
                   description={
                     ele.description ? ele.description.slice(0, 88) : ""
